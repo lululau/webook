@@ -8,7 +8,7 @@ parser.add_option("-d", "--delete-element-file", dest="delete_element_file", hel
 parser.add_option("-j", "--js-file", dest="js_file", help="A JS file to execute", metavar="JS_FILE")
 parser.add_option("-c", "--cover", dest="cover", help="Cover page, local image file or an URL of an image", metavar="COVER_IMAGE", default=None)
 parser.add_option("-o", "--output", dest="output_file", help="The output file", metavar="OUTPUT_FILE")
-parser.add_option("-w", "--wait-seconds", dest="wait_seconds", help="Wait for the page to load", metavar="WAIT_SECONDS", default=30)
+parser.add_option("-w", "--wait-seconds", dest="wait_seconds", help="Wait for the page to load", metavar="WAIT_SECONDS", type="int",default=30)
 parser.add_option("-I", "--ignore-wait-error", dest="ignore_wait_error", help="Ignore wait error", action="store_true", default=False)
 
 (options, args) = parser.parse_args()
