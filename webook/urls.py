@@ -11,7 +11,7 @@ class URL:
 def get_links(token: Token) -> list[Link]:
     if isinstance(token, Link):
         return [token]
-    if "children" in vars(token):
+    if "children" in vars(token) or "_children" in vars(token):
         links = []
         for child in token.children:
             links.extend(get_links(child))
