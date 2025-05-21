@@ -29,6 +29,6 @@ def save_as_pdf(links: list[URL], tempdir: str, options: Values) -> list[str]:
 
             # save as PDF
             pdf = f'{tempdir}/{link.title}.pdf'
-            page.pdf(path=pdf)
+            page.pdf(path=pdf, outline=True, tagged=True)
             pdfs.append(pdf)
     return pdfs

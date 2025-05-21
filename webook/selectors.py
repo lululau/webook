@@ -12,6 +12,9 @@ def parse(filename: str) -> dict[str, list[str]]:
             if k.startswith("web:")
         }
 
-def for_url(url: str, filename: str) -> list[str]:
-    all_selectors = parse(filename)
-    return next((v for (k, v) in all_selectors.items() if k in url), [])
+def for_url(url: str, filename: str | None = None) -> list[str]:
+    if filename:
+        all_selectors = parse(filename)
+        return next((v for (k, v) in all_selectors.items() if k in url), [])
+    else:
+        return []

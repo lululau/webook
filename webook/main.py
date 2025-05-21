@@ -36,18 +36,29 @@ def make_cover(cover: str, tempdir: str) -> str:
     return pdf
 
 def merge(pdfs: list[str], output_file: str):
+    if len(pdfs) == 1:
+        # If there's only one PDF, just copy it to the output file
+        import shutil
+        shutil.copyfile(pdfs[0], output_file)
+        return
+
     merger = PdfWriter()
+    input_streams = []  # Keep track of open file streams to close them later
 
-    for filename in pdfs:
-        input_pdf = open(filename, 'rb')
-        outline_name = os.path.basename(filename)
-        outline_name = os.path.splitext(outline_name)[0]
-        merger.append(input_pdf, outline_item=outline_name)
+    try:
+        for filename in pdfs:
+            input_pdf = open(filename, 'rb')
+            input_streams.append(input_pdf)
+            outline_name = os.path.basename(filename)
+            outline_name = os.path.splitext(outline_name)[0]
+            merger.append(input_pdf, outline_item=outline_name)
 
-    output_pdf = open(output_file, 'wb')
-    merger.write(output_pdf)
-    merger.close()
-    output_pdf.close()
+        with open(output_file, 'wb') as output_pdf_stream:
+            merger.write(output_pdf_stream)
+    finally:
+        merger.close()
+        for stream in input_streams:
+            stream.close()
 
 
 def main():

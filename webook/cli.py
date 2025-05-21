@@ -23,9 +23,3 @@ if not options.output_file:
     print("OUTPUT_FILE is required\n")
     parser.print_help()
     exit(1)
-
-
-if not options.delete_element_file:
-    print("DELETE_ELEMENT_JSON_FILE is required\n")
-    parser.print_help()
-    exit(1)
